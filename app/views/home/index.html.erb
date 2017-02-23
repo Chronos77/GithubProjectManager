@@ -1,2 +1,13 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+
+<%= link_to 'sign_out', destroy_user_session_path, :method => :delete %>
+
+<% current = nil %>
+<% @github.get_user_folders.each do |folder| %>
+  <% if current != folder['owner']['login'] %>
+  <hr>
+    <% current = folder['owner']['login'] %>
+    <%= current %>
+    <hr>
+  <% end %>
+  <p><%= folder['full_name'] %></p>
+<% end %>
